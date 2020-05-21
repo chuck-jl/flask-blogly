@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title  %} user {% endblock %}
+{% block content %}
+
+
+<div class="container m-3">
+    <div class="card">
+        <div class="card-header">
+            User Info:
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Detail information about {{user.get_full_name()}}</h5>
+            <img src={{user.image}} alt="">
+            <p class="card-text">First Name: {{user.first_name}}</p>
+            <p class="card-text">Last Name: {{user.last_name}}</p>
+            <a href="/users/{{user.id}}/edit" class="btn btn-primary mb-2">Edit this user</a>
+            <br>
+            <form action="/users/{{user.id}}/delete" method="POST">
+                <button class="btn btn-danger">Delete this user</button>
+            </form>
+            <a href="/users" class= "btn btn-secondary mt-2">Back to users</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
