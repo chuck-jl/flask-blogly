@@ -1,0 +1,22 @@
+
+.error {
+    padding: 20px;
+    background-color: rgba(241, 80, 80, 0.247);
+    border-radius: 100px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.info {
+    padding: 20px;
+    background-color: rgba(138, 209, 72, 0.247);
+    border-radius: 100px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.warning {
+    padding: 20px;
+    background-color: rgba(230, 183, 84, 0.247);
+    border-radius: 100px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}

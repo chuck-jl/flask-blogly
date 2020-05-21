@@ -1,5 +1,6 @@
 """Models for Blogly."""
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 db= SQLAlchemy()
 
@@ -21,6 +22,8 @@ class User(db.Model):
                             nullable = False)
     image = db.Column(db.Text, 
                         default='https://images.unsplash.com/photo-1519400197429-404ae1a1e184?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80')
+    posts = db.relationship('Post',backref='owner', cascade="all, delete-orphan" )
+
     @property
     def full_name(self):
         return self.get_full_name()
@@ -35,3 +38,22 @@ class User(db.Model):
         """Get full name """
         u = self
         return f"{u.first_name} {u.last_name}"
+
+class Post(db.Model):
+    """Class to refer to posts"""
+    __tablename__ = "posts"
+
+    id = db.Column(db.Integer, primary_key= True, autoincrement= True)
+    title = db.Column(db.Text, nullable = False, default= 'Unknown title')
+    content = db.Column(db.Text, default= 'Woops, nothing has been added yet.')
+    create_at = db.Column(db.DateTime,nullable = False, default = datetime.datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+
+    def __repr__(self):
+        p = self
+        return f"<Post {p.id} {p.title} {p.create_at}>"
+    
+    def readable_time(self):
+        time = self.create_at
+        return time.strftime("%B %d, %Y %H:%M:%S")

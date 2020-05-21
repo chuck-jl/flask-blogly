@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title  %} Post detail {% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">{{post.title}}</h1>
+    <hr class="my-4">
+    <p>{{post.content}}</p>
+    <small class="text-muted my-3">by {{post.owner.full_name}}</small>
+    <br>
+    <small class="text-muted my-3">{{post.readable_time()}}</small>
+    <hr class="my-4">
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="/posts/{{post.id}}/edit" role="button">Edit Post</a>
+      <a class="btn btn-secondary btn-lg" href="/users/{{post.owner.id}}">Back to User</a>
+
+      <form action="/posts/{{post.id}}/delete" method="POST">
+        <button class="btn btn-danger btn-lg">Delete Post</button>
+      </form>
+    </p>
+  </div>
+</div>
+
+{% endblock %}

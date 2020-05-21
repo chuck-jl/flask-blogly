@@ -4,22 +4,45 @@
 {% block content %}
 
 
-<div class="container m-3">
-    <div class="card">
-        <div class="card-header">
-            User Info:
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-4 ">
+            <div class="card">
+                <div class="card-header">
+                    User Info:
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Detail information about {{user.get_full_name()}}</h5>
+                    <img src={{user.image}} alt="" style="width: 70%;">
+                    <p class="card-text">First Name: {{user.first_name}}</p>
+                    <p class="card-text">Last Name: {{user.last_name}}</p>
+                    <a href="/users/{{user.id}}/edit" class="btn btn-primary mb-2">Edit this user</a>
+                    <a href="/users/{{user.id}}/posts/new" class="btn btn-primary mb-2">Add new post</a>
+                    <br>
+                    <form action="/users/{{user.id}}/delete" method="POST">
+                        <button class="btn btn-danger">Delete this user</button>
+                    </form>
+                    <a href="/users" class="btn btn-secondary mt-2">Back to users</a>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <h5 class="card-title">Detail information about {{user.get_full_name()}}</h5>
-            <img src={{user.image}} alt="">
-            <p class="card-text">First Name: {{user.first_name}}</p>
-            <p class="card-text">Last Name: {{user.last_name}}</p>
-            <a href="/users/{{user.id}}/edit" class="btn btn-primary mb-2">Edit this user</a>
-            <br>
-            <form action="/users/{{user.id}}/delete" method="POST">
-                <button class="btn btn-danger">Delete this user</button>
-            </form>
-            <a href="/users" class= "btn btn-secondary mt-2">Back to users</a>
+        <div class="col-7">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Created time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for post in user.posts %}
+                  <tr>
+                    <td><a href="/posts/{{post.id}}">{{post.title}}</a></td>
+                    <td>{{post.readable_time()}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
         </div>
     </div>
 </div>
