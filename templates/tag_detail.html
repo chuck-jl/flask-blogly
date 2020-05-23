@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title  %} Tag detail {% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">Tag: {{tag.name}}</h1>
+    <hr class="my-4">
+    <p>Description: {{tag.description}}</p>
+    <div class="list-group mt-4">
+        {% for post in posts_related %}
+        <a class="list-group-item list-group-item-action" href="/posts/{{post.id}}">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{post.title}}</h5>
+                <small>post by: {{post.owner.full_name}} on {{post.readable_time()}}</small>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+    <hr class="my-4">
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="/tags/{{tag.id}}/edit" role="button">Edit Tag</a>
+      <a class="btn btn-secondary btn-lg" href="/tags">Back to Tags</a>
+    </p>
+  </div>
+</div>
+
+{% endblock %}

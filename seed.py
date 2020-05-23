@@ -1,6 +1,6 @@
 """Seed file to make sample data for users db."""
 
-from models import connect_db, db, User,Post
+from models import connect_db, db, User,Post,Tag,PostTag
 from app import app
 
 # Create all tables
@@ -37,3 +37,10 @@ db.session.add(post4)
 
 db.session.commit()
 
+post1.tags.append(Tag(name="happy", description="I am really happy."))
+post1.tags.append(Tag(name="rookie", description="I am new."))
+post2.tags.append(Tag(name="cool"))
+
+db.session.add(post1)
+db.session.add(post2)
+db.session.commit()

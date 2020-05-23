@@ -10,6 +10,13 @@
     <small class="text-muted my-3">by {{post.owner.full_name}}</small>
     <br>
     <small class="text-muted my-3">{{post.readable_time()}}</small>
+    {% if post.tags %}
+        <p><strong>Tags:</strong>
+        {% for tag in post.tags %}
+        <span class="badge badge-pill badge-primary">{{tag.name}}</span>
+        {% endfor %}
+        </p>
+    {% endif %}
     <hr class="my-4">
     <p class="lead">
       <a class="btn btn-primary btn-lg" href="/posts/{{post.id}}/edit" role="button">Edit Post</a>

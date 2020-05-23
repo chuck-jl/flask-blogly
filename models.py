@@ -48,7 +48,7 @@ class Post(db.Model):
     content = db.Column(db.Text, default= 'Woops, nothing has been added yet.')
     create_at = db.Column(db.DateTime,nullable = False, default = datetime.datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
+    
 
     def __repr__(self):
         p = self
@@ -57,3 +57,21 @@ class Post(db.Model):
     def readable_time(self):
         time = self.create_at
         return time.strftime("%B %d, %Y %H:%M:%S")
+
+class Tag(db.Model):
+    """Class to refer to tags"""
+    __tablename__= "tags"
+
+    id=db.Column(db.Integer, primary_key=True, autoincrement= True)
+    name = db.Column(db.String(25),nullable= False, unique=True)
+    description= db.Column(db.Text, default= 'Woops, nothing has been added yet.')
+    posts = db.relationship('Post', secondary='posts_tags', backref='tags')
+
+class PostTag(db.Model):
+    """Class to link Post and Tag together"""
+    __tablename__ = "posts_tags"
+
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'),primary_key=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'),primary_key=True)
+    
+

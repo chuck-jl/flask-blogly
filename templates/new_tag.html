@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title  %} Add new tag {% endblock %}
+{% block content %}
+<div class="container m-3">
+    <h2>Add a new tag:</h2>
+    <br>
+    <form action="/tags/new" method="POST">
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Name:</span>
+            </div>
+            <input type="text" class="form-control" name="name" maxlength = "25">
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Description:</span>
+            </div>
+            <textarea class="form-control" name = "description"></textarea>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br>
+    <a href="/tags" class="btn btn-secondary">Back to Tags</a>
+</div>
+
+
+
+{% endblock %}

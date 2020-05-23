@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title  %} Edit tag {% endblock %}
+{% block content %}
+
+<div class="container m-3">
+    <h2 class="mb-3">Edit information for {{tag.name}} Tag: </h2>
+    <form action="/tags/{{tag.id}}/edit" method="POST">
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Tag name:</span>
+            </div>
+            <input type="text" class="form-control" name="name" placeholder="{{tag.name}}" maxlength="20"></textarea>
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Description</span>
+            </div>
+            <textarea class="form-control" name = "description" placeholder="{{tag.description}}"></textarea>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="/tags/{{tag.id}}" class="btn btn-secondary">Back to tag</a>
+    </form>
+    <hr>
+    <form action="/tags/{{tag.id}}/delete" method="POST">
+        <button class="btn btn-danger">Delete Tag</button>
+    </form>
+</div>
+
+
+{% endblock %}
